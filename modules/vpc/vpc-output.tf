@@ -50,8 +50,3 @@ output "aws-availability-zones" {
 output "aws-route-table-private-routes-id" {
   value = "${aws_route_table.private-routes.*.id}"
 }
-
-#VGW
-output "vgw" {
-  value = "${aws_vpn_gateway.vgw.id}"
-}

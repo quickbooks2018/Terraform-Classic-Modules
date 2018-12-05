@@ -61,8 +61,8 @@ resource "aws_route_table_association" "public-association" {
 #CREATING PRIVATE SUBNETS FROM A LIST
 resource "aws_subnet" "private-subnets" {
   availability_zone = "${element(data.aws_availability_zones.azs.names,count.index)}"
-   count = "${var.number-of-private-subnets-required}"
- # count = "${length(data.aws_availability_zones.azs.names)}"
+  count = "${var.number-of-private-subnets-required}"
+  # count = "${length(data.aws_availability_zones.azs.names)}"
   cidr_block = "${element(var.vpc-private-subnet-cidr,count.index)}"
   vpc_id = "${aws_vpc.my-vpc.id}"
 
@@ -114,25 +114,17 @@ resource "aws_route_table_association" "private-routes-linking" {
 }
 
 
-###VPN###
-###################################################################
-resource "aws_vpn_gateway" "vgw" {
-  vpc_id = "${aws_vpc.my-vpc.id}"
-}
-
+#VPN# ROUTES PROPAGATIONS
 ############Route Propagations for Public Subnets###########
 resource "aws_vpn_gateway_route_propagation" "vpn-public-subnets" {
-
-
-  vpn_gateway_id = "${aws_vpn_gateway.vgw.id}"
+  vpn_gateway_id = "${var.vgw-id}"
   route_table_id = "${aws_route_table.public-routes.id}"
 
 }
 
 #######Route Propagations for Private Subnets############
 resource "aws_vpn_gateway_route_propagation" "vpn-private-subnets" {
-
-   count = "${length(data.aws_availability_zones.azs.names)}"
-  vpn_gateway_id = "${aws_vpn_gateway.vgw.id}"
-  route_table_id = "${element(aws_route_table.private-routes.*.id,count.index)}"
+  count = "${length(data.aws_availability_zones.azs.names)}"
+vpn_gateway_id = "${var.vgw-id}"
+route_table_id = "${element(aws_route_table.private-routes.*.id,count.index)}"
 }

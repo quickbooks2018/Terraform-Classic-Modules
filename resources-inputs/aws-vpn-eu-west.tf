@@ -7,7 +7,7 @@ module "cloudelligent-vpn" {
   vpn-connection-name = "office-vpn-connection"
   vpc-id = "${module.cloudelligent-vpc.vpc-id}"
 
-  vpn-gateway-id = "${module.cloudelligent-vgw.vgw}"
+  vpn-gateway-id = "${module.cloudelligent-vpc.vgw}"
 
 
 
@@ -18,3 +18,6 @@ module "cloudelligent-vpn" {
   aws-availability-zones = "${module.cloudelligent-vpc.aws-availability-zones}"
 
 }
+
+#NOTE:IF VPN IS REQUIRED UNCOMMENT THE VPN SECTION IN (vpc.tf file) IN VPC DIRECTORY FOR VGW CREATION & ROUTE PROPAGATION + USE THE VPN MODULE
+

@@ -21,11 +21,8 @@ module "cloudelligent-vpc" {
   vpc-cidr = "192.168.0.0/16"
   vpc-public-subnet-cidr = ["192.168.1.0/24","192.168.2.0/24","192.168.3.0/24"]
   vpc-private-subnet-cidr = ["192.168.4.0/24","192.168.5.0/24","192.168.6.0/24"]
-  number-of-public-subnets-required = "3"
+  number-of-public-subnets-required = "2"
   number-of-private-subnets-required = "3"
-
-#NOTE:PLEASE UN-COMMENT "vgw-id" IN CASE OF VPN ROUTE PROPAGATION#
-  vgw-id = "${module.cloudelligent-vgw.vgw}"
 
 
 }

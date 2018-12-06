@@ -11,29 +11,47 @@ resource "aws_security_group" "ec2-sg" {
   }
 
   ingress {
-    from_port = 80
-    protocol = "tcp"
-    to_port = 80
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port = "${var.rule-1-from-port}"
+    protocol = "${var.rule-1-protocol}"
+    to_port = "${var.rule-1-to-port}"
+    cidr_blocks = ["${var.rule-1-cidr_blocks}"]
   }
   ingress {
-    from_port = 443
-    protocol = "tcp"
-    to_port = 443
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port = "${var.rule-2-from-port}"
+    protocol = "${var.rule-2-protocol}"
+    to_port = "${var.rule-2-to-port}"
+    cidr_blocks = ["${var.rule-2-cidr_blocks}"]
+  }
+
+ ingress {
+    from_port = "${var.rule-3-from-port}"
+    protocol = "${var.rule-3-protocol}"
+    to_port = "${var.rule-3-to-port}"
+    cidr_blocks = ["${var.rule-3-cidr_blocks}"]
+  }
+
+
+  ingress {
+    from_port = "${var.rule-4-from-port}"
+    protocol = "${var.rule-4-protocol}"
+    to_port = "${var.rule-4-to-port}"
+    cidr_blocks = ["${var.rule-4-cidr_blocks}"]
   }
   ingress {
-    from_port = 22
-    protocol = "tcp"
-    to_port = 22
-    cidr_blocks = ["39.46.252.153/32"]
+    from_port = "${var.rule-5-from-port}"
+    protocol = "${var.rule-5-protocol}"
+    to_port = "${var.rule-5-to-port}"
+    cidr_blocks = ["${var.rule-5-cidr_blocks}"]
   }
 
   egress {
-    from_port = 0
-    protocol = "-1"
-    to_port = 0
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port = "${var.outbound-rule-1-from-port}"
+    protocol = "${var.outbound-rule-1-protocol}"
+    to_port = "${var.outbound-rule-1-to-port}"
+    cidr_blocks = ["${var.outbound-rule-1-cidr_blocks}"]
   }
+
+
+
 }
 

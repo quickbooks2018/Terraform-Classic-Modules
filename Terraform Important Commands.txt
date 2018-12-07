@@ -1,0 +1,12 @@
+a. terraform init
+b. terraform plan
+c terraform apply
+
+
+1. terraform destroy -target resource_type.resource_logical_name
+
+2. terraform get -update=true
+
+3. terraform output -module=module-name
+
+ 

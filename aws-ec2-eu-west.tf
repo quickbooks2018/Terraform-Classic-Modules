@@ -10,5 +10,11 @@ module "cloudelligent-ec2" {
   user-data = "${file("./modules/ec2/httpd.sh")}"
   instance-name-taq = "cloudelligent-vpn"
  vpc-security-group-ids = "${module.cloudelligent-ec2-sg.ec2-sg-security-group}"
-  ec2-subnets-ids = ["subnet-0b6e2ac390c6107ee","subnet-05905a7e128644611","subnet-076f690927cf310d5"]
+
+  ec2-subnets-ids = ["${module.cloudelligent-vpc.public-subnet-ids}"]
+  #ec2-subnets-ids = ["${module.cloudelligent-vpc.private-subnet-ids}"]
+  #IN CASE OF LAUNCHING EC2 IN SPECIFIC SUBNET USE"
+  #ec2-subnets-ids = ["","","","","",""]
+
+
 }

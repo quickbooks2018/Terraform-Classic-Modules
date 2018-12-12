@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 
-resource "aws_customer_gateway" "customer_gateway" {
+resource "aws_customer_gateway" "customer-gateway" {
   bgp_asn    = 65000
   ip_address = "${var.customer-gateway-ip-address}"
   type       = "ipsec.1"
@@ -16,7 +16,7 @@ resource "aws_customer_gateway" "customer_gateway" {
 
 resource "aws_vpn_connection" "vpn" {
   vpn_gateway_id      = "${var.vpn-gateway-id}"
-  customer_gateway_id = "${aws_customer_gateway.customer_gateway.id}"
+  customer_gateway_id = "${aws_customer_gateway.customer-gateway.id}"
   type                = "ipsec.1"
   static_routes_only  = true
   tags {

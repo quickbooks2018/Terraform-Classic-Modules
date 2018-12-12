@@ -8,10 +8,6 @@ variable "customer-gateway-ip-address" {
   default = ""
 }
 
-#VPN VGW
-variable "aws-vgw-name" {
-  default = ""
-}
 
 #CUSTOMER GATE-WAY NAME
 variable "customer-gateway-name" {

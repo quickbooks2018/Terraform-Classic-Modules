@@ -24,8 +24,5 @@ module "cloudelligent-vpc" {
   number-of-public-subnets-required = "3"
   number-of-private-subnets-required = "3"
 
-#NOTE:PLEASE UN-COMMENT "vgw-id" IN CASE OF VPN ROUTE PROPAGATION#
-  vgw-id = "${module.cloudelligent-vgw.vgw}"
-
 
 }

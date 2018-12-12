@@ -112,19 +112,3 @@ resource "aws_route_table_association" "private-routes-linking" {
   route_table_id = "${element(aws_route_table.private-routes.*.id,count.index)}"
   subnet_id = "${element(aws_subnet.private-subnets.*.id,count.index)}"
 }
-
-
-#VPN# ROUTES PROPAGATIONS
-############Route Propagations for Public Subnets###########
-resource "aws_vpn_gateway_route_propagation" "vpn-public-subnets" {
-  vpn_gateway_id = "${var.vgw-id}"
-  route_table_id = "${aws_route_table.public-routes.id}"
-
-}
-
-#######Route Propagations for Private Subnets############
-resource "aws_vpn_gateway_route_propagation" "vpn-private-subnets" {
-  count = "${length(data.aws_availability_zones.azs.names)}"
-vpn_gateway_id = "${var.vgw-id}"
-route_table_id = "${element(aws_route_table.private-routes.*.id,count.index)}"
-}

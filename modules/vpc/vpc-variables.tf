@@ -105,9 +105,3 @@ variable "vpc-private-subnet-cidr" {
 
 #FETCH AZS FROM REGION
 data "aws_availability_zones" "azs" {}
-
-
-#VGW
-variable "vgw-id" {
-  default = ""
-}

@@ -6,7 +6,7 @@ module "cloudelligent-vpc" {
   vpc-name = "Cloudelligent-vpc"
   vpc-location = "London"
   region = "eu-west-2"
-  internet-gateway-name = "Cloudelligent-IGW"
+  internet-gateway-name = "Cloudelligent-igw"
   map_public_ip_on_launch = "true"
   public-subnets-name = "public-subnets"
   public-subnets-location = "London"

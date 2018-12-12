@@ -1,7 +1,7 @@
 #OUTPUT OF VPC-ID
 output "vpc-id" {
   description = "The ID of the VPC"
-  value = "${aws_vpc.my-vpc.id}"
+  value = "${aws_vpc.vpc.id}"
 }
 
 #OUTPUT OF IGW

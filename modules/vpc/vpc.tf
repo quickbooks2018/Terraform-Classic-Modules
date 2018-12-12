@@ -2,7 +2,7 @@ provider "aws" {
   region = "${var.region}"
 }
 
-resource "aws_vpc" "my-vpc" {
+resource "aws_vpc" "vpc" {
   cidr_block = "${var.vpc-cidr}"
   instance_tenancy = "${var.instance-tenancy}"
   enable_dns_support = "${var.enable-dns-support}"
@@ -15,7 +15,7 @@ resource "aws_vpc" "my-vpc" {
 #CREATING A INTERNET GATEWAY
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = "${aws_vpc.my-vpc.id}"
+  vpc_id = "${aws_vpc.vpc.id}"
 
   tags {
     Name= "${var.internet-gateway-name}"
@@ -29,7 +29,7 @@ resource "aws_subnet" "public-subnets" {
   count = "${var.number-of-public-subnets-required}"
   # count = "${length(data.aws_availability_zones.azs.names)}"
   cidr_block = "${element(var.vpc-public-subnet-cidr,count.index)}"
-  vpc_id = "${aws_vpc.my-vpc.id}"
+  vpc_id = "${aws_vpc.vpc.id}"
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
 
   tags {
@@ -40,7 +40,7 @@ resource "aws_subnet" "public-subnets" {
 
 #CREATING A PUBLIC ROUTES
 resource "aws_route_table" "public-routes" {
-  vpc_id = "${aws_vpc.my-vpc.id}"
+  vpc_id = "${aws_vpc.vpc.id}"
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.igw.id}"
@@ -64,7 +64,7 @@ resource "aws_subnet" "private-subnets" {
   count = "${var.number-of-private-subnets-required}"
   # count = "${length(data.aws_availability_zones.azs.names)}"
   cidr_block = "${element(var.vpc-private-subnet-cidr,count.index)}"
-  vpc_id = "${aws_vpc.my-vpc.id}"
+  vpc_id = "${aws_vpc.vpc.id}"
 
 
   tags {
@@ -95,7 +95,7 @@ resource "aws_nat_gateway" "ngw" {
 #CREATING A PRIAVTE ROUTE-TABLE FOR PRIVATE-SUBNETS
 resource "aws_route_table" "private-routes" {
   count = "${length(data.aws_availability_zones.azs.names)}"
-  vpc_id = "${aws_vpc.my-vpc.id}"
+  vpc_id = "${aws_vpc.vpc.id}"
   route {
     cidr_block = "${var.private-route-cidr}"
     nat_gateway_id = "${element(aws_nat_gateway.ngw.*.id,count.index)}"

@@ -19,13 +19,8 @@ variable "data-center-private-cidr" {
   default = ""
 }
 
-
-variable "vpn-gateway-name" {
-  default = ""
-}
-
 variable "vpn-connection-name" {
-  default = "AWS-VGW-Viginia-vpn-link-DATA-Center-Frankfurt"
+  default = ""
 }
 
 variable "vpc-id" {
@@ -44,5 +39,3 @@ variable "vpn-gateway-id"
 {
   default = ""
 }
-
-data "aws_availability_zones" "azs" {}

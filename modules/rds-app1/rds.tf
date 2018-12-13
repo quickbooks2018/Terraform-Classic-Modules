@@ -21,6 +21,7 @@ resource "aws_db_instance" "db-app1" {
   skip_final_snapshot = "${var.skip-final-snapshot}"
   multi_az = ""
   storage_encrypted = "${var.storage-encrypted}"
+  deletion_protection = "${var.deletion-protection}"
 
 
 }

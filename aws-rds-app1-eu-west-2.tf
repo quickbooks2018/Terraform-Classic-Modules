@@ -17,6 +17,7 @@ module "cloudelligent-rds-app1" {
   skip-final-snapshot = "true"
   multi-az = "true"
   storage-encrypted = "false"
+  deletion-protection = "false"
 
 
   vpc-security-group-ids = "${module.cloudelligent-rds-sg-app1.aws-security-group-rds-app1}"

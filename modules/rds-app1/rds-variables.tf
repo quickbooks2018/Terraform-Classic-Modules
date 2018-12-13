@@ -84,6 +84,10 @@ variable "storage-encrypted" {
   default = ""
 }
 
+variable "deletion-protection" {
+  default = ""
+}
+
 #TAG
 variable "name-aws-db-subnet-group" {
   default = ""

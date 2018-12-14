@@ -13,4 +13,10 @@ c terraform apply
 
 5.terraform apply -target=module.cloudelligent-vpc ---> only apply specific modules
 
+6.terraform state pull----> ok
+
+7.terraform state push---->danger
+
+
+
  

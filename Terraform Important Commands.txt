@@ -17,6 +17,9 @@ c terraform apply
 
 7.terraform state push---->danger
 
+8.terraform state rm module.cloudelligent-rds-app1  ----> https://stackoverflow.com/questions/43950097/how-to-import-manual-changes-into-terraform-remote-state
 
+9.terraform show ---> see after deployment
 
- 
+10. terraform state list
+

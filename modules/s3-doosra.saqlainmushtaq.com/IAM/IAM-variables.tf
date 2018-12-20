@@ -14,3 +14,7 @@ variable "iam-user-tag" {
 variable "iam-user-policy" {
   default = ""
 }
+
+variable "bucket-policy" {
+  default = ""
+}

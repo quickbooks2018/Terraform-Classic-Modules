@@ -16,6 +16,7 @@ module "cloudelligent-vpc" {
   eip-for-nat-gateway-name = "eip-nat-gateway"
   nat-gateway-name = "nat-gateway-name"
   eip-required = "3"
+  private-subnet-name = "private-subnets"
   private-route-cidr = "0.0.0.0/0"
   private-route-name = "private-route"
   vpc-cidr = "192.168.0.0/16"

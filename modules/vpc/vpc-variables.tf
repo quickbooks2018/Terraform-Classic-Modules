@@ -102,6 +102,10 @@ variable "vpc-private-subnet-cidr" {
   type = "list"
   default = ["","",""]
 }
+#PRIVATE SUBNETS TAGS
+variable "private-subnet-name" {
+  default = ""
+}
 
 #FETCH AZS FROM REGION
 data "aws_availability_zones" "azs" {}

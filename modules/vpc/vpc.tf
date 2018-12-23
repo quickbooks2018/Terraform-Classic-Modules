@@ -27,7 +27,6 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "public-subnets" {
   availability_zone = "${element(data.aws_availability_zones.azs.names,count.index)}"
   count = "${var.number-of-public-subnets-required}"
-  # count = "${length(data.aws_availability_zones.azs.names)}"
   cidr_block = "${element(var.vpc-public-subnet-cidr,count.index)}"
   vpc_id = "${aws_vpc.vpc.id}"
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
@@ -62,26 +61,24 @@ resource "aws_route_table_association" "public-association" {
 resource "aws_subnet" "private-subnets" {
   availability_zone = "${element(data.aws_availability_zones.azs.names,count.index)}"
   count = "${var.number-of-private-subnets-required}"
-  # count = "${length(data.aws_availability_zones.azs.names)}"
   cidr_block = "${element(var.vpc-private-subnet-cidr,count.index)}"
   vpc_id = "${aws_vpc.vpc.id}"
 
 
   tags {
-    Name = "Private-Subnet-${count.index+1}"
+    Name = "${var.private-subnet-name}-${count.index+1}"
     Location = "${var.private-subnets-location-name}"
   }
 }
 
-#CREATING 3 EIP NAT-GATEWAY FOR NAT-GATEWAY REDUNDANCY
+#CREATING EIP NAT-GATEWAY FOR NAT-GATEWAY REDUNDANCY
 resource "aws_eip" "eip-ngw" {
-  # count = "${length(var.azs)}"
   count = "${var.eip-required}"
   tags {
     Name = "${var.eip-for-nat-gateway-name}-${count.index+1}"
   }
 }
-#CREATING 3 NAT GATEWAYS IN PUBLIC-SUBNETS, EACH NAT-GATEWAY WILL BE DIFFERENT AZ FOR REDUNDANCY.
+#CREATING NAT GATEWAYS IN PUBLIC-SUBNETS, EACH NAT-GATEWAY WILL BE DIFFERENT AZ FOR REDUNDANCY.
 resource "aws_nat_gateway" "ngw" {
   count = "${var.total-nat-gateway-required}"
   # count = "${length(var.azs)}"

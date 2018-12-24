@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_customer_gateway" "customer-gateway" {
   bgp_asn    = 65000
-  ip_address = "${var.customer-gateway-ip-address}"
+  ip_address = "${var.customer-gateway-static-public-ip}"
   type       = "ipsec.1"
   tags {
     Name = "${var.customer-gateway-name}"

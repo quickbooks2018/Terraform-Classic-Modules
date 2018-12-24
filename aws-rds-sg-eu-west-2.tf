@@ -3,7 +3,7 @@ module "cloudelligent-rds-sg" {
 
   region = "eu-west-2"
   aws-security-group-name = "Cloudelligent-sg-rds"
-  vpc-id = "${module.cloudelligent-vpc.vpc-id}"
+  vpc-id = "${module.vpc.vpc-id}"
   aws-security-group-tag-name = "Cloudelligent-sg-rds"
 
   ###SECURITY INBOUND GROUP RULES###

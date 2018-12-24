@@ -22,4 +22,3 @@ c terraform apply
 9.terraform show ---> see after deployment
 
 10. terraform state list
-

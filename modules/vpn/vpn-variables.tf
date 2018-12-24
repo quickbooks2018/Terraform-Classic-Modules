@@ -1,6 +1,6 @@
 ###VPN###
 #OFFICE STATIS PUBLIC IP
-variable "aws-customer-gateway-static-public-ip" {
+variable "customer-gateway-static-public-ip" {
   default = ""
 }
 #CUSTOMER GATEWAY PUBLIC STATIC ADDRESS

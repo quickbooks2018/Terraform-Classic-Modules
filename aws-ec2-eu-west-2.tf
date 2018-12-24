@@ -11,7 +11,7 @@ module "cloudelligent-ec2" {
   instance-name-taq = "cloudelligent-vpn"
  vpc-security-group-ids = "${module.cloudelligent-ec2-sg.ec2-sg-security-group}"
 
-  ec2-subnets-ids = ["${module.cloudelligent-vpc.public-subnet-ids}"]
+  ec2-subnets-ids = ["${module.vpc.public-subnet-ids}"]
   #ec2-subnets-ids = ["${module.cloudelligent-vpc.private-subnet-ids}"]
   #IN CASE OF LAUNCHING EC2 IN SPECIFIC SUBNET USE"
   #ec2-subnets-ids = ["","","","","",""]

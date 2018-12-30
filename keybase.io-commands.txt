@@ -1,0 +1,11 @@
+1. keybase login
+
+2. keybase pgp gen --multi
+
+3. keybase pgp export | gpg --import
+
+4. keybase pgp export --secret | gpg --import --allow-secret-key-import
+
+5. terraform output secret | base64 --decode | keybase pgp decrypt
+
+

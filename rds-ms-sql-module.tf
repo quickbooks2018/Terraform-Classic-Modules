@@ -6,7 +6,7 @@ module "rds-ms-sql" {
   final-snapshot-identifier = "Cloudelligent-db-final-snap-shot-1"
   rds-allocated-storage = "20"
   rds-engine = "sqlserver-ex"
-  engine-version = "14.00.1000.169.v1"
+  engine-version = "14.00.3035.2.v1"
   db-instance-class = "db.t2.micro"
   backup-retension-period = "0"
   backup-window = "04:00-06:00"

@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 
-resource "aws_db_instance" "db-app2" {
+resource "aws_db_instance" "db" {
   identifier = "${var.identifier}"
   final_snapshot_identifier = "${var.final-snapshot-identifier}"
   allocated_storage = "${var.rds-allocated-storage}"

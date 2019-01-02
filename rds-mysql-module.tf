@@ -1,5 +1,5 @@
-module "cloudelligent-rds-app1" {
-  source = "./modules/rds-app1-mysql"
+module "rds-mysql-app1" {
+  source = "./modules/rds-mysql"
 
   region = "eu-west-2"
   identifier = "cloudeligent-db-app1"
@@ -12,15 +12,15 @@ module "cloudelligent-rds-app1" {
   backup-retension-period = "0"
   backup-window = "04:00-06:00"
   publicly-accessible = "false"
-  rds-username = "sage"
-  rds-password = "cbalallsooslsllsld11P4499Lcba1cba"
+  rds-username = "demo"
+  rds-password = "thisisjustademo"
   skip-final-snapshot = "true"
   multi-az = "true"
   storage-encrypted = "false"
   deletion-protection = "false"
 
 
-  vpc-security-group-ids = "${module.cloudelligent-rds-sg.aws-security-group-rds}"
+  vpc-security-group-ids = "${module.rds-sg.aws-security-group-rds}"
   rds-private-subnets-groups-name = "cloudelligent-rds-private-subnets-group"
   rds-private-subnets-groups-description = "Allowed Only Private Subnets for Cloudeligent-RDS-MYSQL"
   aws-db-subnet-group-private-subnets = "${module.vpc.private-subnet-ids}"

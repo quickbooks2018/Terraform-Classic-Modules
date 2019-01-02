@@ -1,10 +1,10 @@
-module "cloudelligent-rds-sg" {
+module "rds-sg" {
   source = "./modules/rds-sg"
 
-  region = "eu-west-2"
-  aws-security-group-name = "Cloudelligent-sg-rds"
+  region = "us-west-2"
+  aws-security-group-name = "ican-sg-rds"
   vpc-id = "${module.vpc.vpc-id}"
-  aws-security-group-tag-name = "Cloudelligent-sg-rds"
+  aws-security-group-tag-name = "ican-sg-rds"
 
   ###SECURITY INBOUND GROUP RULES###
   #RULE-1-INBOUND-RULES

@@ -1,10 +1,15 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
+
 resource "aws_iam_access_key" "Saqlain-Mushtaq" {
   user    = "${aws_iam_user.Saqlain-Mushtaq.name}"
   pgp_key = "keybase:quickbooks2018"
 }
 
 resource "aws_iam_user" "Saqlain-Mushtaq" {
-  name = "loadbalancer"
+  name = "Saqlain-Mushtaq"
   path = "/system/"
 }
 

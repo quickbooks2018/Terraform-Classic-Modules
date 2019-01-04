@@ -70,6 +70,18 @@ variable "vpc-security-group-ids" {
   default = ""
 }
 
+variable "multi-az" {
+  default = ""
+}
+
+variable "storage-encrypted" {
+  default = ""
+}
+
+variable "deletion-protection" {
+  default = ""
+}
+
 #TAG
 variable "name-aws-db-subnet-group" {
   default = ""

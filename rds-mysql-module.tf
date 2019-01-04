@@ -3,7 +3,7 @@ module "rds-mysql-app1" {
 
   region = "eu-west-2"
   identifier = "cloudeligent-db-app1"
-  #final-snapshot-identifier = "Cloudeligent-db-final-snap-shot-1"
+  final-snapshot-identifier = "Cloudeligent-db-final-snap-shot-1"
   rds-allocated-storage = "5"
   storage-type = "gp2"
   rds-engine = "mysql"
@@ -18,6 +18,7 @@ module "rds-mysql-app1" {
   multi-az = "true"
   storage-encrypted = "false"
   deletion-protection = "false"
+
 
 
   vpc-security-group-ids = "${module.rds-sg.aws-security-group-rds}"

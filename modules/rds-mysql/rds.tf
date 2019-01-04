@@ -3,9 +3,9 @@ provider "aws" {
 }
 
 
-resource "aws_db_instance" "db-app1" {
+resource "aws_db_instance" "db" {
   identifier = "${var.identifier}"
- # final_snapshot_identifier = "${var.final-snapshot-identifier}"
+  final_snapshot_identifier = "${var.final-snapshot-identifier}"
   allocated_storage = "${var.rds-allocated-storage}"
   storage_type = "${var.storage-type}"
   engine = "${var.rds-engine}"
@@ -19,10 +19,9 @@ resource "aws_db_instance" "db-app1" {
   vpc_security_group_ids = ["${var.vpc-security-group-ids}"]
   db_subnet_group_name = "${aws_db_subnet_group.rds-instance-subnets.name}"
   skip_final_snapshot = "${var.skip-final-snapshot}"
-  multi_az = ""
+  multi_az = "${var.multi-az}"
   storage_encrypted = "${var.storage-encrypted}"
   deletion_protection = "${var.deletion-protection}"
-
 
 }
 

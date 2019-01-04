@@ -17,9 +17,9 @@ resource "aws_db_instance" "db" {
   password = "${var.rds-password}"
   vpc_security_group_ids = ["${var.vpc-security-group-ids}"]
   db_subnet_group_name = "${aws_db_subnet_group.rds-instance-subnets.name}"
-  multi_az = "false"
-
-
+  multi_az = "${var.multi-az}"
+  storage_encrypted = "${var.storage-encrypted}"
+  deletion_protection = "${var.deletion-protection}"
 }
 
 

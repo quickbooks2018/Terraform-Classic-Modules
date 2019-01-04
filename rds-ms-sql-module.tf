@@ -13,6 +13,9 @@ module "rds-ms-sql" {
   publicly-accessible = "false"
   rds-username = "demo"
   rds-password = "thisisjustademo"
+  multi-az = "false"
+  storage-encrypted = "false"
+  deletion-protection = "false"
 
   vpc-security-group-ids = "${module.rds-sg.aws-security-group-rds}"
   rds-private-subnets-groups-name = "Cloudelligent-rds-private-subnets-group"

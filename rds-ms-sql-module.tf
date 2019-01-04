@@ -19,7 +19,7 @@ module "rds-ms-sql" {
 
   vpc-security-group-ids = "${module.rds-sg.aws-security-group-rds}"
   rds-private-subnets-groups-name = "Cloudelligent-rds-private-subnets-group"
-  rds-private-subnets-groups-description = "Allowed Only Private Subnets for Cloudelligent-RDS-MYSQL"
+  rds-private-subnets-groups-description = "Allowed Only Private Subnets for Cloudelligent-RDS-ms-sql"
   aws-db-subnet-group-private-subnets = "${module.vpc.private-subnet-ids}"
   name-aws-db-subnet-group = "Cloudelligent-rds-subnets-groups"
 }

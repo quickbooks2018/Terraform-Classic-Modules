@@ -1,8 +1,8 @@
-module "cloudelligent-ec2" {
+module "ec2-app-v1" {
   source = "./modules/ec2"
-  region = "eu-west-2"
+  region = "eu-west-1"
   key-name = "power"
-  ami-id = "ami-0274e11dced17bb5b"
+  ami-id = "ami-08935252a36e25f85"
   instance-type = "t2.micro"
  # subnet-id =
   number-of-ec2-instances-required = "3"

@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 #CREATING A NEW KEY PAIR AND EXPORTING OUR PUBLIC-KEY
-resource "aws_key_pair" "key-pair-name" {
+resource "aws_key_pair" "key-pair" {
   key_name = "${var.key-name}"
   public_key = "${var.public-key-file-name}"
 }
@@ -11,7 +11,7 @@ resource "aws_key_pair" "key-pair-name" {
 
 
 #Creating an EC2 instance in Public Subnet must mention the "Subnet ID"#
-resource "aws_instance" "cloudelligent-ec2" {
+resource "aws_instance" "ec2" {
 
   ami = "${var.ami-id}"
 

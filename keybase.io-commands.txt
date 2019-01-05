@@ -8,4 +8,6 @@
 
 5. terraform output secret | base64 --decode | keybase pgp decrypt
 
+6. keybase logout
+
 

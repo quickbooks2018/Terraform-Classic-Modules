@@ -20,10 +20,10 @@ resource "aws_security_group" "rds-sg" {
   }
 
   ingress {
-    from_port = "${var.rule-1-from-port}"
-    protocol = "${var.rule-1-protocol}"
-    to_port = "${var.rule-1-to-port}"
-    cidr_blocks = ["${var.rule-1-cidr_blocks}"]
+    from_port = "${var.rule-2-from-port}"
+    protocol = "${var.rule-2-protocol}"
+    to_port = "${var.rule-2-to-port}"
+    cidr_blocks = ["${var.rule-2-cidr_blocks}"]
   }
 
   egress {

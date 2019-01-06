@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_db_instance" "db" {
   identifier = "${var.identifier}"
-  final_snapshot_identifier = "${var.final-snapshot-identifier}-${count.index+1}"
+  final_snapshot_identifier = "${var.final-snapshot-identifier}"
   allocated_storage = "${var.rds-allocated-storage}"
   engine = "${var.rds-engine}"
   engine_version = "${var.engine-version}"

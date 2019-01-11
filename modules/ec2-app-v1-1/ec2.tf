@@ -12,7 +12,7 @@ resource "aws_instance" "ec2" {
   key_name = "${var.key-name}"
   vpc_security_group_ids = ["${var.vpc-security-group-ids}"]
   tags {
-    Name= "${var.instance-name-tag}-${count.index+1}"
+    Name= "${var.instance-name-tag}"
   }
 
 

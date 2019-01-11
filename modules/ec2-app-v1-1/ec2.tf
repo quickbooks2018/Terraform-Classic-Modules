@@ -3,13 +3,6 @@ provider "aws" {
 }
 
 
-#CREATING A NEW KEY PAIR AND EXPORTING OUR PUBLIC-KEY
-resource "aws_key_pair" "key-pair" {
-  key_name = "${var.key-name}"
-  public_key = "${var.public-key-file-name}"
-}
-
-
 resource "aws_instance" "ec2" {
   ami = "${var.ami-id}"
   instance_type = "${var.instance-type}"

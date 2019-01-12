@@ -1,5 +1,5 @@
-module "ec2-app-v1-1" {
-  source = "./modules/ec2-app-v1-1"
+module "ec2-static-ip" {
+  source = "modules/ec2-static-ip"
 
   region = "eu-west-1"
   key-name = "power"

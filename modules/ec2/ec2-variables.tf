@@ -13,6 +13,10 @@ variable "instance-type" {
   default = ""
 }
 
+variable "associate-public-ip-address" {
+  default = ""
+}
+
 variable "subnet-id" {
   default = ""
 }

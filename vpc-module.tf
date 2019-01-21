@@ -3,6 +3,7 @@ module "vpc" {
   ###VPC###
   instance-tenancy = "default"
   enable-dns-support = "true"
+  enable-dns-hostnames = "true"
   vpc-name = "Cloudelligent-vpc"
   vpc-location = "Frankfurt"
   region = "eu-central-1"

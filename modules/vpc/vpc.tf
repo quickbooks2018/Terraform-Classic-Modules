@@ -6,6 +6,8 @@ resource "aws_vpc" "vpc" {
   cidr_block = "${var.vpc-cidr}"
   instance_tenancy = "${var.instance-tenancy}"
   enable_dns_support = "${var.enable-dns-support}"
+  enable_dns_hostnames = "${var.enable-dns-hostnames}"
+
   tags {
     Name= "${var.vpc-name}"
     Location= "${var.vpc-location}"

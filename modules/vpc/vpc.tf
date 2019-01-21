@@ -52,7 +52,6 @@ resource "aws_route_table" "public-routes" {
 }
 
 #ASSOCIATE/LINK PUBLIC-ROUTE WITH PUBLIC-SUBNETS LIST
-# https://github.com/hashicorp/terraform/issues/14880
 resource "aws_route_table_association" "public-association" {
   count = "${length(data.aws_availability_zones.azs.names)}"
   route_table_id = "${aws_route_table.public-routes.id}"

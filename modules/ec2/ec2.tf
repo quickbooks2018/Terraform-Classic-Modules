@@ -17,10 +17,6 @@ resource "aws_instance" "ec2" {
 
   instance_type = "${var.instance-type}"
 
-#  Single Subnet
-
- #subnet_id = "${var.subnet-id}"
-
 # Number of EC2-instances required.
   count = "${var.number-of-ec2-instances-required}"
 

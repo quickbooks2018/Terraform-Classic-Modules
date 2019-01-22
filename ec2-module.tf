@@ -6,7 +6,7 @@ module "ec2-app-v1" {
   instance-type = "t2.micro"
   number-of-ec2-instances-required = "3"
   public-key-file-name = "${file("./modules/ec2/power.pub")}"
-  user-data = "${file("./modules/ec2/httpd.sh")}"
+
   instance-name-taq = "cloudelligent-vpn"
   associate-public-ip-address = "true"
 
@@ -16,6 +16,7 @@ module "ec2-app-v1" {
   #IN CASE OF LAUNCHING EC2 IN SPECIFIC SUBNETS OR PRIVATE SUBNETS, PLEASE UN-COMMENT BELOW"
   #ec2-subnets-ids = ["${module.cloudelligent-vpc.private-subnet-ids}"]
   #ec2-subnets-ids = ["","","","","",""]
+  #user-data = "${file("./modules/ec2/httpd.sh")}"
 
 
 }

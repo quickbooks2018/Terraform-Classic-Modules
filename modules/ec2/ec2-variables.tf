@@ -47,3 +47,38 @@ variable "ec2-subnets-ids" {
   type = "list"
   default = ["","",""]
 }
+
+#PROVISIONERS START
+variable "source-file" {
+  default = ""
+}
+
+variable "destination-file" {
+  default = ""
+}
+
+variable "command-1" {
+  default = ""
+}
+
+variable "command-2" {
+  default = ""
+}
+
+#CONNECTION
+variable "connection-type" {
+  default = ""
+}
+
+variable "host-ip" {
+  default = ""
+}
+
+variable "user-name" {
+  default = ""
+}
+
+variable "private-key" {
+  default = ""
+}
+#PROVISIONERS END

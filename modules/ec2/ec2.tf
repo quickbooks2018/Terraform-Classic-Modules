@@ -37,4 +37,7 @@ resource "aws_instance" "ec2" {
   tags {
     Name= "${var.instance-name-taq}-${count.index+1}"
   }
+
+
 }
+

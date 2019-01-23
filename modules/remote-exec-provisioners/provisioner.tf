@@ -12,7 +12,7 @@ resource "null_resource" "remote-exec" {
       type     = "ssh"
       user     = "ec2-user"
       private_key = "${file("./power.pub")}"
-      host     = ""
+      host     = "Only-Single-host-ip"
       timeout = "10m"
     }
   }
@@ -26,7 +26,7 @@ resource "null_resource" "remote-exec" {
       type     = "ssh"
       user     = "ec2-user"
       private_key = "${file("./power.pub")}"
-      host     = "176.34.158.169"
+      host     = "Only-Single-host-ip"
       timeout = "10m"
     }
   }

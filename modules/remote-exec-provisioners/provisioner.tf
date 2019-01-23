@@ -6,7 +6,7 @@ resource "null_resource" "remote-exec" {
 
 
   provisioner "file" {
-    source = "${file("./httpd.sh")}"
+    source = "./modules/remote-exex-provisioners/httpd.sh"
     destination  = "/tmp/httpd.sh"
     connection {
       type     = "ssh"

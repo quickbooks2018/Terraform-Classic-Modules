@@ -3,6 +3,7 @@ provider "aws" {
 }
 
 resource "null_resource" "remote-exec" {
+  count = "${length(module.ec2-app-v1.ec2-public-ip)}"
 
 
   provisioner "file" {
@@ -12,8 +13,8 @@ resource "null_resource" "remote-exec" {
       type     = "ssh"
       user     = "ec2-user"
       private_key = "${file("./power.pub")}"
-      host     = "Only-Single-host-ip"
-      timeout = "10m"
+      host     = "${element(module.ec2-app-v1.ec2-public-ip,count.index )}"
+      timeout = "2m"
     }
   }
 
@@ -26,13 +27,13 @@ resource "null_resource" "remote-exec" {
       type     = "ssh"
       user     = "ec2-user"
       private_key = "${file("./modules/remote-exex-provisioners/power.pub")}"
-      host     = "Only-Single-host-ip"
-      timeout = "10m"
+      host     = "${element(module.ec2-app-v1.ec2-public-ip,count.index )}"
+      timeout = "2m"
     }
   }
 }
 
 #OUTPUTS
 output "remote-exec" {
-  value = "${null_resource.remote-exec.id}"
+  value = "${null_resource.remote-exec.*.id}"
 }

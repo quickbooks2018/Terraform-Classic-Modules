@@ -46,12 +46,8 @@ variable "vpc-id" {
   default = ""
 }
 
-variable "frontend-attachment-1" {
-  default = ""
-}
-
-variable "frontend-attachment-2" {
-  default = ""
+variable "no-of-frontend-attachments" {
+  type = "list"
 }
 
 variable "certificate-arn" {

@@ -40,7 +40,6 @@ resource "aws_alb_listener" "frontend-listner-443" {
 
 
 
-
 resource "aws_lb_target_group" "frontend-target-group" {
   name     = "${var.tg-name}"
   port     = "${var.port}"
@@ -48,12 +47,8 @@ resource "aws_lb_target_group" "frontend-target-group" {
   vpc_id   = "${var.vpc-id}"
 }
 
-resource "aws_alb_target_group_attachment" "frontend-attachment-1" {
+resource "aws_alb_target_group_attachment" "frontend-attachments" {
+  count = "${length(var.no-of-frontend-attachments)}"
   target_group_arn = "${aws_lb_target_group.frontend-target-group.arn}"
-  target_id = "${var.frontend-attachment-1}"
-}
-
-resource "aws_alb_target_group_attachment" "frontend-attachment-2" {
-  target_group_arn = "${aws_lb_target_group.frontend-target-group.arn}"
-  target_id = "${var.frontend-attachment-2}"
+  target_id = "${element(var.no-of-frontend-attachments,count.index )}"
 }

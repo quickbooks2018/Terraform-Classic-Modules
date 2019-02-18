@@ -14,10 +14,6 @@ module "alb" {
   tg-name = "cloudellient-tg"
   port = "80"
   protocol = "HTTP"
-  vpc-id = "${module.vpc.vpc-id }"
-  frontend-attachment-1 = ""
-  frontend-attachment-2 = ""
-
-
-
+  vpc-id = "${module.vpc.vpc-id}"
+  no-of-frontend-attachments = "${module.ec2-app-v1.aws-instance}"
 }

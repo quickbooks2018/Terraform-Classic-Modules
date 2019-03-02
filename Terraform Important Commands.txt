@@ -22,3 +22,9 @@ c terraform apply
 9.terraform show ---> see after deployment
 
 10. terraform state list
+
+Note: Pull directly from git hub
+
+https://www.terraform.io/docs/modules/sources.html
+
+source = "github.com/quickbooks2018/Terraform-Classic-Modules/modules/vpc"

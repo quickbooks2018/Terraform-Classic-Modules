@@ -101,5 +101,11 @@ variable "private-subnet-name" {
   default = ""
 }
 
-#FETCH AZS FROM REGION
+#AZS IN REGION
 data "aws_availability_zones" "azs" {}
+
+#AZS FROM LIST
+variable "azs" {
+  type = "list"
+}
+

@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "./modules/vpc"
+  source = "./modules/vpc-azs"
   ###VPC###
   instance-tenancy = "default"
   enable-dns-support = "true"
@@ -7,6 +7,7 @@ module "vpc" {
   vpc-name = "Cloudelligent-vpc"
   vpc-location = "Frankfurt"
   region = "eu-central-1"
+  azs = ["eu-central-1a","eu-central-1b"]
   internet-gateway-name = "Cloudelligent-igw"
   map_public_ip_on_launch = "true"
   public-subnets-name = "public-subnets"
@@ -21,6 +22,6 @@ module "vpc" {
   private-route-cidr = "0.0.0.0/0"
   private-route-name = "private-route"
   vpc-cidr = "10.11.0.0/16"
-  vpc-public-subnet-cidr = ["10.11.1.0/24","10.11.2.0/24","10.11.3.0/24"]
-  vpc-private-subnet-cidr = ["10.11.4.0/24","10.11.5.0/24","10.11.6.0/24"]
+  vpc-public-subnet-cidr = ["10.11.1.0/24","10.11.2.0/24"]
+  vpc-private-subnet-cidr = ["10.11.4.0/24","10.11.5.0/24"]
 }

@@ -61,7 +61,7 @@ resource "aws_route_table_association" "public-association" {
 #CREATING PRIVATE SUBNETS FROM A LIST
 resource "aws_subnet" "private-subnets" {
   availability_zone = "${element(var.azs,count.index)}"
-  count = "${length(var.vpc-public-subnet-cidr)}"
+  count = "${length(var.vpc-private-subnet-cidr)}"
   cidr_block = "${element(var.vpc-private-subnet-cidr,count.index)}"
   vpc_id = "${aws_vpc.vpc.id}"
 

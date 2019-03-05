@@ -27,7 +27,7 @@ resource "aws_internet_gateway" "igw" {
 
 #PUBLIC SUBNET FROM A LIST
 resource "aws_subnet" "public-subnets" {
-  availability_zone = "${element(data.aws_availability_zones.azs.names,count.index)}"
+  availability_zone = "${element(var.azs,count.index)}"
   count = "${length(var.vpc-public-subnet-cidr)}"
   cidr_block = "${element(var.vpc-public-subnet-cidr,count.index)}"
   vpc_id = "${aws_vpc.vpc.id}"
@@ -53,14 +53,14 @@ resource "aws_route_table" "public-routes" {
 
 #ASSOCIATE/LINK PUBLIC-ROUTE WITH PUBLIC-SUBNETS LIST
 resource "aws_route_table_association" "public-association" {
-  count = "${length(data.aws_availability_zones.azs.names)}"
+  count = "${length(var.azs)}"
   route_table_id = "${aws_route_table.public-routes.id}"
   subnet_id = "${element(aws_subnet.public-subnets.*.id, count.index)}"
 }
 
 #CREATING PRIVATE SUBNETS FROM A LIST
 resource "aws_subnet" "private-subnets" {
-  availability_zone = "${element(data.aws_availability_zones.azs.names,count.index)}"
+  availability_zone = "${element(var.azs,count.index)}"
   count = "${length(var.vpc-private-subnet-cidr)}"
   cidr_block = "${element(var.vpc-private-subnet-cidr,count.index)}"
   vpc_id = "${aws_vpc.vpc.id}"
@@ -79,6 +79,7 @@ resource "aws_eip" "eip-ngw" {
     Name = "${var.eip-for-nat-gateway-name}-${count.index+1}"
   }
 }
+
 #CREATING NAT GATEWAYS IN PUBLIC-SUBNETS, EACH NAT-GATEWAY WILL BE DIFFERENT AZ FOR REDUNDANCY.
 resource "aws_nat_gateway" "ngw" {
   count = "${var.total-nat-gateway-required}"
@@ -91,7 +92,7 @@ resource "aws_nat_gateway" "ngw" {
 
 #CREATING A PRIAVTE ROUTE-TABLE FOR PRIVATE-SUBNETS
 resource "aws_route_table" "private-routes" {
-  count = "${length(data.aws_availability_zones.azs.names)}"
+  count = "${length(var.azs)}"
   vpc_id = "${aws_vpc.vpc.id}"
   route {
     cidr_block = "${var.private-route-cidr}"
@@ -105,7 +106,45 @@ resource "aws_route_table" "private-routes" {
 
 #ASSOCIATE/LINK PRIVATE-ROUTES WITH PRIVATE-SUBNETS
 resource "aws_route_table_association" "private-routes-linking" {
-  count = "${length(data.aws_availability_zones.azs.names)}"
+  count = "${length(var.azs)}"
   route_table_id = "${element(aws_route_table.private-routes.*.id,count.index)}"
   subnet_id = "${element(aws_subnet.private-subnets.*.id,count.index)}"
+}
+
+
+###DB SUBNETS###
+
+#CREATING DB SUBNETS FROM A LIST
+resource "aws_subnet" "db-subnets" {
+  availability_zone = "${element(var.azs,count.index)}"
+  count = "${length(var.db-subnet-cidr)}"
+  cidr_block = "${element(var.db-subnet-cidr,count.index)}"
+  vpc_id = "${aws_vpc.vpc.id}"
+
+
+  tags {
+    Name = "${var.db-subnet-name}-${count.index+1}"
+    Location = "${var.db-subnets-location-name}"
+  }
+}
+
+#CREATING A DB ROUTE-TABLE FOR DB-SUBNETS
+resource "aws_route_table" "db-routes" {
+  count = "${length(var.azs)}"
+  vpc_id = "${aws_vpc.vpc.id}"
+  route {
+    cidr_block = "${var.db-route-cidr}"
+    nat_gateway_id = "${element(aws_nat_gateway.ngw.*.id,count.index)}"
+  }
+  tags {
+    Name = "${var.db-route-name}-${count.index+1}"
+  }
+
+}
+
+#ASSOCIATE/LINK DB-ROUTES WITH DB-SUBNETS
+resource "aws_route_table_association" "db-routes-linking" {
+  count = "${length(var.azs)}"
+  route_table_id = "${element(aws_route_table.db-routes.*.id,count.index)}"
+  subnet_id = "${element(aws_subnet.db-subnets.*.id,count.index)}"
 }

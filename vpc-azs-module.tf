@@ -18,7 +18,6 @@ module "vpc" {
   total-nat-gateway-required = "1"
   eip-for-nat-gateway-name = "eip-nat-gateway"
   nat-gateway-name = "nat-gateway"
-  eip-required = "1"
   private-route-cidr = "0.0.0.0/0"
   private-route-name = "private-route"
   vpc-cidr = "10.11.0.0/16"

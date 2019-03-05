@@ -74,7 +74,7 @@ resource "aws_subnet" "private-subnets" {
 
 #CREATING EIP NAT-GATEWAY FOR NAT-GATEWAY REDUNDANCY
 resource "aws_eip" "eip-ngw" {
-  count = "${var.eip-required}"
+  count = "${var.total-nat-gateway-required}"
   tags {
     Name = "${var.eip-for-nat-gateway-name}-${count.index+1}"
   }

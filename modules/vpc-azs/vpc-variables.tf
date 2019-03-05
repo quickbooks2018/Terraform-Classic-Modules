@@ -65,10 +65,6 @@ variable "eip-for-nat-gateway-name" {
 variable "nat-gateway-name" {
   default = ""
 }
-#NUMBER OF ELASTIC-IPS REQUIRED FOR NAT-GATEWAYS
-variable "eip-required" {
-  default = ""
-}
 
 #PRIVATE ROUTES CIDR
 variable "private-route-cidr" {

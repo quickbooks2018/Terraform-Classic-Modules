@@ -86,14 +86,13 @@ variable "vpc-cidr" {
 #VPC PUBLIC SUBNETS CIDR BLOCK LIST
 variable "vpc-public-subnet-cidr" {
   type = "list"
-  default = ["","","",""]
 }
 
 #VPC PRIVATE SUBNETS CIDR BLOCK LIST
 variable "vpc-private-subnet-cidr" {
   type = "list"
-  default = ["","",""]
 }
+
 #PRIVATE SUBNETS TAGS
 variable "private-subnet-name" {
   default = ""

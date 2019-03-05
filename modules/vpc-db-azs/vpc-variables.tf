@@ -99,8 +99,27 @@ variable "private-subnet-name" {
 #AZS IN REGION
 data "aws_availability_zones" "azs" {}
 
-#AZS FROM LIST
-variable "azs" {
+#DB SUBNETS
+
+variable "db-subnet-cidr" {
   type = "list"
 }
 
+#TAGS DB
+variable "db-subnet-name" {
+  default = ""
+}
+
+variable "db-subnets-location-name" {
+  default = ""
+}
+
+variable "db-route-name" {
+  default = ""
+}
+
+#CREATING A DB ROUTE-TABLE FOR DB-SUBNETS
+
+variable "db-route-cidr" {
+  default = ""
+}

@@ -7,6 +7,8 @@ resource "aws_s3_bucket" "bucket" {
 
   bucket = "${var.bucket-name}"
 
+  region = "${var.region}"
+
   acl    = "${var.acl}"
 
 
@@ -20,7 +22,7 @@ resource "aws_s3_bucket" "bucket" {
 
   lifecycle {
 
-    prevent_destroy = true
+    prevent_destroy = false
 
   }
 
@@ -28,7 +30,7 @@ resource "aws_s3_bucket" "bucket" {
 
   tags {
 
-    Name = "${var.tag}"
+    Name = "${var.bucket-name}"
 
   }
 

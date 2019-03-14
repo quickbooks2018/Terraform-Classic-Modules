@@ -15,8 +15,3 @@ variable "acl" {
 variable "versioning-enable" {
   default = ""
 }
-
-#TAG
-variable "tag" {
-  default = ""
-}

@@ -8,7 +8,7 @@ terraform {
     region = "eu-west-2"
     bucket = "terraform.cloudelligent.com"
     key = "cloudelligent/dev/terraform.tfstate"
-    dynamodb_table = "tflocktable"
+    dynamodb_table = "terraformstatelocktable"
 
   }
 }

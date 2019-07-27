@@ -28,7 +28,7 @@ resource "aws_s3_bucket" "bucket" {
 
 
 
-  tags {
+  tags = {
 
     Name = "${var.bucket-name}"
 

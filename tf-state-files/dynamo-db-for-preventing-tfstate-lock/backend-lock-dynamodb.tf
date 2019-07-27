@@ -2,15 +2,17 @@ provider "aws" {
   region = "eu-west-2"
 }
 
+#Note this DynamoDB Table must be in the same region as your S3 bucket is setup for backend#
+
 resource "aws_dynamodb_table" "tflocktable" {
 
-  name = "tflocktable"
+  name = "terraformstatelocktable"
 
   hash_key = "LockID"
 
-  read_capacity = 5
+  read_capacity = 1
 
-  write_capacity = 5
+  write_capacity = 1
 
   attribute {
 

@@ -7,7 +7,7 @@ terraform {
     encrypt = "true"
     region = "eu-west-2"
     bucket = "terraform.cloudelligent.com"
-    key = "Cloudelligent-Terraform-State-Files/cloudelligent-tf-state-files"
+    key = "cloudelligent/dev/terraform.tfstate"
     dynamodb_table = "tflocktable"
 
   }

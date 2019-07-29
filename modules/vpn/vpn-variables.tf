@@ -1,5 +1,5 @@
 ###VPN###
-#OFFICE STATIS PUBLIC IP
+#OFFICE STATIC PUBLIC IP
 variable "customer-gateway-static-public-ip" {
   default = ""
 }

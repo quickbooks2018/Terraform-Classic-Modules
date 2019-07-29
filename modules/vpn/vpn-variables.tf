@@ -3,10 +3,6 @@
 variable "customer-gateway-static-public-ip" {
   default = ""
 }
-#CUSTOMER GATEWAY PUBLIC STATIC ADDRESS
-variable "customer-gateway-ip-address" {
-  default = ""
-}
 
 
 #CUSTOMER GATE-WAY NAME

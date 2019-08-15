@@ -1,3 +1,4 @@
+#https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
 provider "aws" {
   region = "us-east-1"
 }
@@ -19,22 +20,19 @@ resource "aws_iam_user_policy" "Saqlain-Mushtaq-rw" {
 
   policy = <<EOF
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": ["s3:ListBucket"],
-            "Resource": ["arn:aws:s3:::doosra.saqlainmushtaq.com"]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject",
-                "s3:GetObject"
-            ],
-            "Resource": ["arn:aws:s3:::doosra.saqlainmushtaq.com/*"]
-        }
-    ]
+  "Version":"2012-10-17",
+  "Statement":[
+    {
+      "Sid":"AddPerm",
+      "Effect":"Allow",
+      "Principal": "*",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource":["arn:aws:s3:::examplebucket/*"]
+    }
+  ]
 }
 EOF
 }

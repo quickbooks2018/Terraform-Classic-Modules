@@ -41,11 +41,6 @@ output "aws-route-table-public-routes-id" {
   value = "${aws_route_table.public-routes.*.id}"
 }
 
-#OUTPUT OF REGION AZS
-output "aws-availability-zones" {
-  value = "${data.aws_availability_zones.azs.names}"
-}
-
 #OUTPUT OF PRIVATE ROUTE TABLE IDS
 output "aws-route-table-private-routes-id" {
   value = "${aws_route_table.private-routes.*.id}"

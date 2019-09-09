@@ -1,0 +1,302 @@
+https://adamtheautomator.com/terraform-windows/
+
+
+
+Adam the Automator
+HOME
+ADVERTISING
+CONSULTING
+WRITE FOR ME
+PORTFOLIO
+HOW-TO VIDEOS
+ABOUT ADAM
+Subscribe
+14 AUGUST 2019
+/
+TERRAFORM
+Getting Started with Terraform on Windows: Install, Setup and Demo
+Getting Started with Terraform on Windows: Install, Setup and Demo
+Chris Blackden
+Chris Blackden
+Read more posts by this author.
+
+@devbyaccident
+In the infrastructure as code (IaC) space, one of the most useful tools to come out in the last several years is HashiCorp's Terraform. The ability to version infrastructure, automate provisioning of resources, and execute across different cloud vendors is huge for any DevOps and automation workflows.
+
+One use-case for Terraform is in CI/CD. Terraform allows you to:
+
+create a testing environment
+deploy an application
+run integration tests
+destroy the testing environment
+All of the steps are performed automatically too. And no data center required!
+
+Prerequisites
+This article is a walkthrough on getting Terraform up and running on Windows. If you'd like to follow along, please be sure you have the following prerequisites in place.
+
+A Windows 10 device
+An AWS Account
+The AWS CLI installed and configured on that device. You can learn how to install it here and how to configure it here.
+(Optional) Visual Studio Code with the Terraform extension
+Installing Terraform on Windows
+To leverage the power of Terraform, you must first get it installed on your operating system of choice. In this article, I'm going to be focusing on Windows. But know that Terraform can run on other operating systems. If you're not on Windows, take a look at the installation documentation.
+
+The Hard Way
+If you can't use a package manager or you want to understand how the installation process works, you can install Terraform manually. You can install Terraform by downloading the binary and adding it to the system path environment variable. If this looks intimidating, I assure you there's an easier way to do it you'll learn in the next section.
+
+Download the appropriate version of Terraform from HashiCorp's download page. In my case, it's the Windows 64-bit version.
+Make a folder on your C:\ drive where you can put the Terraform executable. I prefer to place installers in a subfolder (e.g. C:\tools) where you can put binaries.
+After the the download finishes, go find it in File Explorer. Extract the zip file to the folder you created in step 2.
+Open your Start Menu and type in "environment" and the first thing that comes up should be Edit the System Environment Variables option. Click on that and you should see this window.
+
+System Properties
+5.   Click on Environment Variables... at the bottom and you'll see this:
+
+
+Windows environment variables
+6.   Under the bottom section where it says System Variables, find one called Path and click edit. You'll then see a list of where to find the binaries that Windows might need for any given reason.
+
+7.   Click New and add the folder path where terraform.exe is located to the bottom of the list. It should look like this when you finish.
+
+
+Editing the system path
+
+8.   Click OK on each of the menus you've opened up until there's no more left.
+
+9.   To make sure that Windows detects the new path, open a new CMD/PowerShell prompt and enter refreshenv.
+
+10.   Verify the installation was successful by entering terraform --version. If it returns a version, you're good to go.
+
+
+The Easy Way
+Phew, that was a lot of work! That would be awful to do every time you had to install new software on your device. Let's use a package manager instead. There are a few out package managers you can use to install Terraform on Windows. For Windows, my favorite is Chocolatey. It makes installing, removing and updating software as simple as a one-line command, and Terraform is no exception to that.
+
+To install Terraform with Chocolatey, do the following steps:
+
+Open a CMD/PowerShell prompt as an administrator and install Chocolatey using the command from their install page.
+Once that is complete, run choco install terraform. If you like, you can also put -y on the end to auto-agree to installing it on your device.
+After that command runs, you will get something like this:
+
+Chocolatey v0.10.13
+2 validations performed. 1 success(es), 1 warning(s), and 0 error(s).
+
+Installing the following packages:
+terraform
+By installing you accept licenses for the packages.
+Progress: Downloading terraform 0.12.6... 100%
+
+terraform v0.12.6 [Approved]
+Downloading terraform 64 bit
+  from 'https://releases.hashicorp.com/terraform/0.12.6/terraform_0.12.6_windows
+Download of terraform_0.12.6_windows_amd64.zip (15.32 MB) completed.
+--SNIP--
+3.   Verify the installation was successful by entering terraform --version.
+
+The Linux Way
+I can almost hear what you're thinking. Wait a minute Chris, didn't you say this was going to cover installing Terraform on Windows?
+
+Yes, and it still is. But one of the features on Windows 10 is the Windows for Linux Subsystem, or WSL. This allows you to run Linux commands on Windows.
+
+Install WSL. I'm not going to go in depth on how to install and set up WSL here, but if you want to follow along and don't have it set up already. A TechSnips snip I did on this topic can be found below.
+
+2.   In your WSL shell, run apt-get install unzip You'll need this to extract the Terraform binaries later.
+
+3.   Download Terraform by running wget https://releases.hashicorp.com/terraform/0.12.6/terraform_0.12.6_linux_amd64.zip. Remember to replace the version and architecture with the one that best fits your device. You can find the full list of Terraform Releases here.
+
+4.   Run unzip terraform_0.12.6_linux_amd64.zip terraform to unzip the contents of the zip into a folder called terraform.
+
+5.   Once the ZIP file is uncompressed, you'll need to move it somewhere accessible by the system path. Fortunately, Linux has a folder that users can add binaries to by default. Move the Terraform binary there by running mv terraform /usr/local/bin/. The /usr/local/bin folder is already set in your system path.
+
+6.   Verify the installation was successful by running terraform --version.
+Automating an AWS EC2 Instance with Terraform
+Now that you have installed Terraform, you can begin using it. In this post, I'm going to demonstrate building with a simple AWS EC2 Instance. But know Terraform can provision hundreds of different types of infrastructure.
+
+To get started, you'll first need a directory to run the Terraform scripts from. It's important to have a separate directory for each environment. At the time I'm writing this, Terraform doesn't have a way to filter what it runs. It will run every script in your current working directory.
+
+Setting Up a TF Script
+In your cmd or PowerShell console ran as administrator, run mkdir hello-terraform then cd ./hello-terraform
+Once you have a directory, you'll need a Terraform script. Below is an example of one you can use. This is a typical Terraform script using the AWS provider to create an AWS instance resource.
+If you'd like the entire script, copy it below. If you want to understand what this script is doing, read on below.
+# Terraform HCL
+
+provider "aws" {
+  region = "us-east-1"
+  shared_credentials_file = "~/.aws/credentials"
+  profile = "default"
+}
+
+resource "aws_instance" "ubuntu" {
+  ami           = "ami-07d0cf3af28718ef8"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "HelloTerraform"
+  }
+}
+3.   Save the script above as main.tf in your working directory.
+
+Understanding TF Scripts
+Before you go any further, look at the block below and what it's declaring.
+
+#Terraform HCL
+
+provider "aws" {
+  region = "us-east-1"
+  shared_credentials_file = "~/.aws/credentials"
+  profile = "default"
+}
+This block tells Terraform what provider to use. There are providers for all the major cloud vendors, as well as some on-prem vendors. If you're more advanced and you know how to write Golang, you can also write your own provider.
+
+This block tells Terraform to use the AWS provider and access keys in the ~/.aws/credentials file under the profile name default. This file gets created when you setup the AWS CLI with aws config command as stated in the prerequisites.
+
+It's also worth noting that ~/ is shorthand for the current user's directory. If you're coming from a Windows background, this is equal to as $env:USERPROFILE or %USERPROFILE%. But Terraform does not support that notation at the time of writing.
+
+The next block below describes an EC2 Instance, and what to build it with. If you take a look at the Terraform documentation for aws_instance, you can see some parameters are required; some are optional. In this case, the required parameters are the AMI ID (ami-07d0cf3af28718ef8) for Ubuntu 18.04 LTS and t2.micro for the instance type.
+
+By passing a tag block with the key Name and the value HelloTerraform, this tag will also get assigned to the instance that gets created. This is optional.
+
+#Terraform HCL
+
+resource "aws_instance" "ubuntu" {
+  ami           = "ami-07d0cf3af28718ef8"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "HelloTerraform"
+  }
+}
+Building the AWS EC2 Instance: Testing
+Now that the script is set up, call it by running terraform init from your working directory. This will pull down all the dependencies and provider into a folder named .terraform. If all goes well, you should get something like this:
+
+
+terraform init
+Before you make any changes, Terraform allows you to see what will be created by running terraform plan. Here is what that will output:
+
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but will not be
+persisted to local or remote state storage.
+
+------------------------------------------------------------------------
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_instance.ubuntu will be created
+  + resource "aws_instance" "ubuntu" {
+      + ami                          = "ami-07d0cf3af28718ef8"
+      + arn                          = (known after apply)
+      + associate_public_ip_address  = (known after apply)
+      + availability_zone            = (known after apply)
+      + cpu_core_count               = (known after apply)
+      + cpu_threads_per_core         = (known after apply)
+      + get_password_data            = false
+...
+--SNIP--
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
+Building the AWS EC2 Instance: Creating
+Now you're ready to run it for yourself by running terraform apply. Below you will see output like terraform plan, but with an added prompt to confirm that you actually want to apply these changes.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value:    
+Once you type 'yes', Terraform will start provisioning the instance by calling the AWS APIs with the access key in your credentials file. This may take some time. Once finished, you'll see something like below:
+aws_instance.ubuntu: Creating...
+aws_instance.ubuntu: Still creating... [10s elapsed]
+aws_instance.ubuntu: Still creating... [20s elapsed]
+aws_instance.ubuntu: Still creating... [30s elapsed]
+aws_instance.ubuntu: Creation complete after 33s [id=i-07cefd2a426a179b5]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+Destroying the AWS EC2 Instance
+Once you're done with the test environment, you can destroy the instance.
+
+In your cmd/PowerShell console, type terraform destroy. Like the apply command, you'll see a list of resources Terraform is going to destroy then a prompt before actually destroying them.
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: 
+Once you type yes, Terraform will start destroying the instance and confirm when it's finished.
+
+aws_instance.ubuntu: Destroying... [id=i-07cefd2a426a179b5]
+aws_instance.ubuntu: Still destroying... [id=i-07cefd2a426a179b5, 10s elapsed]
+aws_instance.ubuntu: Still destroying... [id=i-07cefd2a426a179b5, 20s elapsed]
+aws_instance.ubuntu: Still destroying... [id=i-07cefd2a426a179b5, 30s elapsed]
+aws_instance.ubuntu: Destruction complete after 30s
+
+Destroy complete! Resources: 1 destroyed.
+Summary
+Now you know the many different ways to install and run Terraform on Windows. In this post, I covered a single use case of configuring an AWS EC2 instance. Through that demonstration, you learned how to understand and interpret a Terraform file and what output Terraform returns when running. You then created and destroyed the instance, all from the your cmd/PowerShell console.
+
+By now, you should have a better understanding of how Terraform works, and how to get started with it in your own environment. Happy Terraforming!
+
+Further Reading
+How to Use Terraform with EC2 instances: Deploying and Removing
+How to Set Up an AWS Instance From Scratch Using PowerShell
+If you enjoyed this post, be sure to check out some similar posts on Terraform
+How to Use Terraform with EC2 instances: Deploying and Removing
+Build and tear down a Terraform EC2 instance with ease using a simple text file and the Terraform infrastructure as code tool!
+
+4 MIN READ
+Subscribe to Adam the Automator
+Get the latest posts delivered right to your inbox
+
+youremail@example.com
+Subscribe
+Meet Our Sponsors
+The Pester Book
+Teach Me: How to Write How-To Technical Articles that Make Money
+Building a PowerShell Tool: Mini-Course
+PowerShell for SysAdmins
+
+PluralSight Courses
+Microsoft Cognitive Services: Azure Custom Text to Speech
+Building PowerShell Security Tools in a Windows Environment
+Infrastructure Testing with Pester
+Building a Client Troubleshooting Tool in PowerShell
+Building Advanced PowerShell Functions and Modules
+PowerShell Toolmaking Fundamentals
+Client-Side PowerShell Scripting for Reliable SCCM Deployments
+Planning & Creating Applications in System Center ConfigMgr 2012
+PowerShell DevOps Playbook
+
+Tags
+How-To (280)
+PowerShell (239)
+Windows PowerShell (44)
+CarTalks (30)
+Active Directory (29)
+Self Improvement (21)
+SCCM (20)
+Cmdlet of the Day (19)
+Microsoft Azure (19)
+Career (15)
+
+Comments powered by Talkyard.
+
+Adam the Automator icon
+Adam the Automator
+—
+Getting Started with Terraform on Windows: Install, Setup and Demo
+Share this
+
+Adam the Automator © 2019
+Latest Posts
+Facebook
+Twitter
+Privacy Policy

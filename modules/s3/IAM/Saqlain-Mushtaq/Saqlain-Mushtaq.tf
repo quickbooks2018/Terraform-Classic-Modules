@@ -35,7 +35,7 @@ resource "aws_iam_user_policy" "Saqlain-Mushtaq-rw" {
             "s3:ListBucket",
             "s3:GetBucketLocation"
          ],
-         "Resource":"arn:aws:s3:::cloudelligent-iam-role"
+         "Resource":"arn:aws:s3:::infragurus-iam-role"
       },
       {
          "Effect":"Allow",
@@ -45,7 +45,7 @@ resource "aws_iam_user_policy" "Saqlain-Mushtaq-rw" {
             "s3:GetObject",
             "s3:GetObjectAcl"
          ],
-         "Resource":"arn:aws:s3:::cloudelligent-iam-role/*"
+         "Resource":"arn:aws:s3:::infragurus-iam-role/*"
       }
    ]
 }

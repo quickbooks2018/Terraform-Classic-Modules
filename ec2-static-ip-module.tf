@@ -9,6 +9,6 @@ module "ec2-static-ip" {
   instance-type = "t2.micro"
   user-data = "${file("./modules/ec2-app-v1-1/httpd.sh")}"
   vpc-security-group-ids = ""
-  instance-name-tag = "Cloudelligent-demo-prod"
+  instance-name-tag = "infragurus-demo-prod"
 
 }

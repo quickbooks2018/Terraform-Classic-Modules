@@ -22,7 +22,7 @@ module "rds-mysql-app1" {
 
 
   vpc-security-group-ids = "${module.rds-sg.aws-security-group-rds}"
-  rds-private-subnets-groups-name = "cloudelligent-rds-private-subnets-group"
+  rds-private-subnets-groups-name = "infragurus-rds-private-subnets-group"
   rds-private-subnets-groups-description = "Allowed Only Private Subnets for Cloudeligent-RDS-MYSQL"
   aws-db-subnet-group-private-subnets = "${module.vpc.private-subnet-ids}"
   name-aws-db-subnet-group = "cloudeligent-rds-subnets-groups"

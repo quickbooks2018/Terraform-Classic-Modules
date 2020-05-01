@@ -4,7 +4,7 @@
     {
       "Effect": "Allow",
       "Action": ["s3:ListBucket"],
-      "Resource": ["arn:aws:s3:::sftp-cloudelligent"]
+      "Resource": ["arn:aws:s3:::sftp-infragurus"]
     },
     {
       "Effect": "Allow",
@@ -12,7 +12,7 @@
         "s3:PutObject",
         "s3:GetObject"
       ],
-      "Resource": ["arn:aws:s3:::sftp-cloudelligent/*"]
+      "Resource": ["arn:aws:s3:::sftp-infragurus/*"]
     }
   ]
 }

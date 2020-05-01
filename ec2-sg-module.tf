@@ -1,4 +1,4 @@
-module "cloudelligent-ec2-sg" {
+module "infragurus-ec2-sg" {
   source = "./modules/ec2-sg"
   region = "eu-west-2"
   vpc-id = "${module.vpc.vpc-id}"

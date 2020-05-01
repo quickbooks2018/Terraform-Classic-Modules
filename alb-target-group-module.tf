@@ -3,7 +3,7 @@ module "alb-target-group" {
 
   region = "eu-west-1"
   #Application Load Balancer Target Group
-  alb-tg-name = "cloudelligent-tg"
+  alb-tg-name = "infragurus-tg"
   target-group-port = "80"
   target-group-protocol = "HTTP"
   vpc-id = "${module.vpc.vpc-id}"

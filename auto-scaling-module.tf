@@ -16,7 +16,7 @@ module "auto-scaling" {
   launch-configuration-name = "test-lc"
   image-id = "ami-0282da38dbca0973d"
   instance-type = "t2.micro"
-  launch-configuration-security-groups = "${module.infragurus-ec2-sg.ec2-sg-security-group}"
+  launch-configuration-security-groups = "${module.cloudgeeks-ec2-sg.ec2-sg-security-group}"
   launch-configuration-public-key-name = "power"
 
   #Auto-Scaling
@@ -29,7 +29,7 @@ module "auto-scaling" {
   force-delete = "true"
   #A list of subnet IDs to launch resources in
   vpc-zone-identifier = "${module.vpc.public-subnet-ids}"
-  target-group-arns = "arn:aws:elasticloadbalancing:eu-west-1:898668804275:targetgroup/infragurus-tg/bbc376dff9e0dd2f"
+  target-group-arns = "arn:aws:elasticloadbalancing:eu-west-1:898668804275:targetgroup/cloudgeeks-tg/bbc376dff9e0dd2f"
   health-check-type = "ELB"
   tag-key = "Name"
   tag-value = "testing"

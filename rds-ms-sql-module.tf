@@ -2,8 +2,8 @@ module "rds-ms-sql" {
   source = "./modules/rds-ms-sql"
 
   region = "eu-west-2"
-  identifier = "infragurus-db-app2-dev"
-  final-snapshot-identifier = "infragurus-db-final-snap-shot"
+  identifier = "cloudgeeks-db-app2-dev"
+  final-snapshot-identifier = "cloudgeeks-db-final-snap-shot"
   rds-allocated-storage = "20"
   rds-engine = "sqlserver-ex"
   engine-version = "14.00.3035.2.v1"
@@ -18,8 +18,8 @@ module "rds-ms-sql" {
   deletion-protection = "false"
 
   vpc-security-group-ids = "${module.rds-sg.aws-security-group-rds}"
-  rds-private-subnets-groups-name = "infragurus-rds-private-subnets-group"
-  rds-private-subnets-groups-description = "Allowed Only Private Subnets for infragurus-RDS-ms-sql"
+  rds-private-subnets-groups-name = "cloudgeeks-rds-private-subnets-group"
+  rds-private-subnets-groups-description = "Allowed Only Private Subnets for cloudgeeks-RDS-ms-sql"
   aws-db-subnet-group-private-subnets = "${module.vpc.private-subnet-ids}"
-  name-aws-db-subnet-group = "infragurus-rds-subnets-groups"
+  name-aws-db-subnet-group = "cloudgeeks-rds-subnets-groups"
 }

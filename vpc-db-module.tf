@@ -4,11 +4,11 @@ module "vpc" {
   instance-tenancy = "default"
   enable-dns-support = "true"
   enable-dns-hostnames = "true"
-  vpc-name = "infragurus-vpc"
+  vpc-name = "cloudgeeks-vpc"
   vpc-location = "Frankfurt"
   region = "eu-central-1"
   azs = ["eu-central-1a","eu-central-1b"]
-  internet-gateway-name = "infragurus-igw"
+  internet-gateway-name = "cloudgeeks-igw"
   map_public_ip_on_launch = "true"
   public-subnets-name = "public-subnets"
   public-subnets-location = "Frankfurt"

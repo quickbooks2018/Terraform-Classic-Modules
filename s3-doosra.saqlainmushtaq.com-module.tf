@@ -1,4 +1,4 @@
-module "infragurus-s3-doosra-bucketmushtaq-com" {
+module "cloudgeeks-s3-doosra-bucketmushtaq-com" {
   source = "./modules/s3-doosra.saqlainmushtaq.com"
 
   region = "eu-west-2"

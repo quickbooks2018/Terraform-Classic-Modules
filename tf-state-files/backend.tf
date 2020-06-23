@@ -6,8 +6,8 @@ terraform {
   backend "s3" {
     encrypt = "true"
     region = "eu-west-2"
-    bucket = "terraform.infragurus.com"
-    key = "infragurus/dev/terraform.tfstate"
+    bucket = "terraform.cloudgeeks.ca"
+    key = "cloudgeeks/dev/terraform.tfstate"
     dynamodb_table = "terraformstatelocktable"
 
   }

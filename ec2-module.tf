@@ -7,14 +7,14 @@ module "ec2-app-v1" {
   number-of-ec2-instances-required = "3"
   public-key-file-name = "${file("./modules/ec2/power.pub")}"
 
-  instance-name-taq = "infragurus-vpn"
+  instance-name-taq = "cloudgeeks-vpn"
   associate-public-ip-address = "true"
 
-  vpc-security-group-ids = "${module.infragurus-ec2-sg.ec2-sg-security-group}"
+  vpc-security-group-ids = "${module.cloudgeeks-ec2-sg.ec2-sg-security-group}"
   ec2-subnets-ids = ["${module.vpc.public-subnet-ids}"]
 
   #IN CASE OF LAUNCHING EC2 IN SPECIFIC SUBNETS OR PRIVATE SUBNETS, PLEASE UN-COMMENT BELOW"
-  #ec2-subnets-ids = ["${module.infragurus-vpc.private-subnet-ids}"]
+  #ec2-subnets-ids = ["${module.cloudgeeks-vpc.private-subnet-ids}"]
   #ec2-subnets-ids = ["","","","","",""]
   #user-data = "${file("./modules/ec2/httpd.sh")}"
 
